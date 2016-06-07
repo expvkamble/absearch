@@ -7,6 +7,15 @@ public class DistanceAndDuration {
 
     Distance distance;
     Duration duration;
+    String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Distance getDistance() {
         return distance;
