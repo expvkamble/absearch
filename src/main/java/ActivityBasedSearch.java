@@ -4,6 +4,7 @@
 
 import model.activity.Activity;
 import model.activity.ActivityReponse;
+import model.googledistancematrix.GoogleDistanceMatrixResponse;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +60,12 @@ public class ActivityBasedSearch {
     ArrayList<Activity> getDistanceMatrix(@PathVariable("hotelLatLongList") String hotelLatLongList,
                                           @PathVariable("activitieslatlongList") String activitieslatlongList) {
 
-        System.out.println(" activitieslatlongList :"+activitieslatlongList);
+        System.out.println(" hotelLatLongList :"+ hotelLatLongList);
+
+        System.out.println(" activitieslatlongList :"+ activitieslatlongList);
+
+        GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"driving","AIzaSyDCKtP2VUzBweaAkueh9jQ0qbCa0aT_O2k");
+
         return null;
 
     }

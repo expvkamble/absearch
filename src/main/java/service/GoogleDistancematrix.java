@@ -1,6 +1,7 @@
 package service;
 
 import model.activity.ActivityReponse;
+import model.googledistancematrix.GoogleDistanceMatrixResponse;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -9,8 +10,8 @@ import retrofit.http.Query;
  */
 public interface GoogleDistancematrix {
     @GET("/json")
-    public ActivityReponse getActivities(@Query("origins") String origins,
-                                         @Query("destinations") String destinations,
-                                         @Query("mode") String mode,
-                                         @Query("key") String key);
+    public GoogleDistanceMatrixResponse getDistanceMatrix(@Query("origins") String origins,
+                                                          @Query("destinations") String destinations,
+                                                          @Query("mode") String mode,
+                                                          @Query("key") String key);
 }
