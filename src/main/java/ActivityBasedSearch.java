@@ -4,7 +4,9 @@
 
 import model.activity.Activity;
 import model.activity.ActivityReponse;
+import model.googledistancematrix.DistanceAndDuration;
 import model.googledistancematrix.GoogleDistanceMatrixResponse;
+import model.googledistancematrix.Row;
 import model.hotelsearch.Hotel;
 import model.hotelsearch.HotelSearchResult;
 import org.springframework.boot.*;
@@ -21,6 +23,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 @RestController
 @EnableAutoConfiguration
@@ -64,6 +68,58 @@ public class ActivityBasedSearch {
 
         System.out.println(" activitieslatlongList :"+activitieslatlongList);
         HotelSearchResult hotelSearchResult = hotelSearch.getHotels(destination1,checkInDate,checkOutDate,"2","TWrdB4AgBIs6Y6rBoF2HNMPwF42PQl4H");
+
+
+        ArrayList<Hotel> hotels = hotelSearchResult.getHotelList();
+
+        String hotelLatLongList= "";
+
+        for(Hotel hotel: hotels) {
+
+            hotelLatLongList = hotelLatLongList+hotel.getLatitude()+","+hotel.getLongitude()+"|";
+            hotel.addShopUrl();
+        }
+
+
+        GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"walking","AIzaSyDCKtP2VUzBweaAkueh9jQ0qbCa0aT_O2k");
+        ArrayList<Row> rows  = googleDistanceMatrixResponse.getRows();
+
+        int numberOfHotels= hotels.size();
+        long minSqaueSum = 0;
+        long maxSqaueSum = 0;
+
+        for(int i = 0 ; i < numberOfHotels; i++) {
+
+            Hotel hotel = hotels.get(i);
+            Row row = rows.get(i);
+
+            long sm = hotel.addWalkSumSquare(row);
+
+            if (sm > maxSqaueSum) {
+                maxSqaueSum = sm;
+            }
+            if (sm < minSqaueSum ) {
+                minSqaueSum = sm;
+            }
+        }
+
+        for(Hotel hotel: hotels) {
+
+            hotel.addWalkScore(minSqaueSum,maxSqaueSum);
+        }
+
+        Collections.sort(hotels, new Comparator<Hotel>() {
+            @Override
+            public int compare(Hotel o1, Hotel o2) {
+                if(o1.getScroeInDouble() < o2.getScroeInDouble()) {
+                    return 1;
+                } else  {
+                    return -1;
+                }
+            }
+        });
+
+
 
         return hotelSearchResult.getHotelList();
 

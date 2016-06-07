@@ -1,5 +1,10 @@
 package model.hotelsearch;
 
+import model.googledistancematrix.DistanceAndDuration;
+import model.googledistancematrix.Row;
+
+import java.util.ArrayList;
+
 /**
  * Created by vkamble on 6/7/16.
  */
@@ -19,9 +24,43 @@ public class Hotel {
     String lowRate;
     String latitude;
     String longitude;
-    String rateCurrencyCode;
+
     String largeThumbnailUrl;
     String thumbnailUrl;
+    String shopUrl;
+
+
+    String walkScore;
+
+    double scroeInDouble;
+
+    long squarSum;
+
+    public String getWalkScore() {
+        return walkScore;
+    }
+
+    public void setWalkScore(String walkScore) {
+        this.walkScore = walkScore;
+    }
+
+    public String getShopUrl() {
+        return shopUrl;
+    }
+
+    public void setShopUrl(String shopUrl) {
+        this.shopUrl = shopUrl;
+    }
+
+    String rateCurrencyCode;
+
+    public long getSquarSum() {
+        return squarSum;
+    }
+
+    public void setSquarSum(long squarSum) {
+        this.squarSum = squarSum;
+    }
 
     public String getRateCurrencyCode() {
         return rateCurrencyCode;
@@ -158,4 +197,52 @@ public class Hotel {
     public void setLowRate(String lowRate) {
         this.lowRate = lowRate;
     }
+
+    public void addShopUrl() {
+
+        String shopUrl = "https://www.expedia.com/";
+        shopUrl = shopUrl + localizedName+".h"+hotelId+".Hotel-Information";
+        this.shopUrl = shopUrl;
+    }
+
+    public long addWalkSumSquare(Row row) {
+
+        ArrayList<DistanceAndDuration> distanceAndDurations = row.getElements();
+
+        long tempSquarSum = 0;
+        for(DistanceAndDuration distanceAndDuration : distanceAndDurations) {
+            long distanceToAttraction = Long.valueOf(distanceAndDuration.getDistance().getValue());
+            tempSquarSum = tempSquarSum + distanceToAttraction;
+        }
+
+        this.squarSum = tempSquarSum;
+        return this.squarSum;
+    }
+
+    public double getScroeInDouble() {
+        return scroeInDouble;
+    }
+
+    public void setScroeInDouble(double scroeInDouble) {
+        this.scroeInDouble = scroeInDouble;
+    }
+
+    public void addWalkScore(long min , long max) {
+
+        double minSqrt = Math.sqrt(min);
+
+        double diff = Math.sqrt(max) - minSqrt;
+        double delta = Math.sqrt(this.squarSum) - minSqrt;
+
+        double score = delta /diff;
+
+        double  finalScore =  ( (1-score ) * 10);
+
+        this.scroeInDouble = finalScore;
+        this.walkScore = ""+scroeInDouble;
+
+
+    }
+
+
 }
