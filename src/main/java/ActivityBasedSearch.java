@@ -57,7 +57,7 @@ public class ActivityBasedSearch {
 
 
     @RequestMapping("/absearch/getDistance/{hotelLatLongList}/{activitieslatlongList}")
-    ArrayList<Activity> getDistanceMatrix(@PathVariable("hotelLatLongList") String hotelLatLongList,
+    GoogleDistanceMatrixResponse getDistanceMatrix(@PathVariable("hotelLatLongList") String hotelLatLongList,
                                           @PathVariable("activitieslatlongList") String activitieslatlongList) {
 
         System.out.println(" hotelLatLongList :"+ hotelLatLongList);
@@ -66,7 +66,7 @@ public class ActivityBasedSearch {
 
         GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"driving","AIzaSyDCKtP2VUzBweaAkueh9jQ0qbCa0aT_O2k");
 
-        return null;
+        return googleDistanceMatrixResponse;
 
     }
 
