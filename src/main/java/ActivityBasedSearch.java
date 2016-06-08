@@ -46,7 +46,25 @@ public class ActivityBasedSearch {
 
         ActivityReponse activityReponse = activities.getActivities(destination,"TWrdB4AgBIs6Y6rBoF2HNMPwF42PQl4H");
 
-        ArrayList<Activity> result = activityReponse.getActivities();
+        ArrayList<Activity> tempResult = activityReponse.getActivities();
+
+        ArrayList<Activity> result = new ArrayList<Activity>();
+
+        for (Activity activity : tempResult) {
+
+            boolean skipThisActivity = false;
+            for(String  category: activity.getCategories()) {
+               if(category.contains("Transfers")) {
+                   skipThisActivity = true;
+                   break;
+               }
+            }
+
+            if(!skipThisActivity) {
+                result.add(activity);
+            }
+        }
+
 
         System.out.println(" I am version 2.0");
         return result;
