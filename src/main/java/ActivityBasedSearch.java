@@ -82,7 +82,13 @@ public class ActivityBasedSearch {
         }
 
 
-        GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"walking","AIzaSyDCKtP2VUzBweaAkueh9jQ0qbCa0aT_O2k");
+        // vaibhav's key
+        //GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"walking","AIzaSyDCKtP2VUzBweaAkueh9jQ0qbCa0aT_O2k");
+
+        //Vishal's key
+        GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"walking","AIzaSyBknuwqumRP-dWqTwrrGFoantCJKkFAM5s");
+
+
         ArrayList<Row> rows  = googleDistanceMatrixResponse.getRows();
 
         int numberOfHotels= hotels.size();
