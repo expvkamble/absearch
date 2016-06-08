@@ -101,10 +101,10 @@ public class ActivityBasedSearch {
 
 
         // vaibhav's key
-        //GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"walking","AIzaSyDCKtP2VUzBweaAkueh9jQ0qbCa0aT_O2k");
+        GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"walking","AIzaSyDCKtP2VUzBweaAkueh9jQ0qbCa0aT_O2k");
 
         //Vishal's key
-        GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"walking","AIzaSyBknuwqumRP-dWqTwrrGFoantCJKkFAM5s");
+       // GoogleDistanceMatrixResponse googleDistanceMatrixResponse =  googleDistancematrix.getDistanceMatrix(hotelLatLongList,activitieslatlongList,"walking","AIzaSyBknuwqumRP-dWqTwrrGFoantCJKkFAM5s");
 
 
         ArrayList<Row> rows  = googleDistanceMatrixResponse.getRows();
