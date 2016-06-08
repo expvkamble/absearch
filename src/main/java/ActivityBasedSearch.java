@@ -85,7 +85,7 @@ public class ActivityBasedSearch {
        // return result;
 
         System.out.println(" activitieslatlongList :"+activitieslatlongList);
-        HotelSearchResult hotelSearchResult = hotelSearch.getHotels(destination1,checkInDate,checkOutDate,"2","TWrdB4AgBIs6Y6rBoF2HNMPwF42PQl4H");
+        HotelSearchResult hotelSearchResult = hotelSearch.getHotels(destination1,checkInDate,checkOutDate,"2","15","TWrdB4AgBIs6Y6rBoF2HNMPwF42PQl4H");
 
 
         ArrayList<Hotel> hotels = hotelSearchResult.getHotelList();

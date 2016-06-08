@@ -15,5 +15,6 @@ public interface HotelSearch {
                                                @Query("checkInDate") String checkInDate,
                                                @Query("checkOutDate") String checkOutDate,
                                                @Query("room1") String room1,
-                                               @Query("apikey") String apikey);
+                                                @Query("resultsPerPage") String resultsPerPage,
+                                                @Query("apikey") String apikey);
 }
