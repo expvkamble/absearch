@@ -4,6 +4,7 @@ import model.googledistancematrix.DistanceAndDuration;
 import model.googledistancematrix.Row;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Created by vkamble on 6/7/16.
@@ -29,12 +30,21 @@ public class Hotel {
     String thumbnailUrl;
     String shopUrl;
 
+    String mapUrl;
 
     String walkScore;
 
     double scroeInDouble;
 
     long squarSum;
+
+    public String getMapUrl() {
+        return mapUrl;
+    }
+
+    public void setMapUrl(String mapUrl) {
+        this.mapUrl = mapUrl;
+    }
 
     public String getWalkScore() {
         return walkScore;
@@ -244,5 +254,20 @@ public class Hotel {
 
     }
 
+    public void addMapUrl(String attactionLatLongUrl) {
+
+        StringTokenizer st = new StringTokenizer(attactionLatLongUrl,"|");
+
+        String url = "https://maps.googleapis.com/maps/api/staticmap?center="+latitude+","+longitude+"&zoom=13&size=600x300&maptype=roadmap&key=AIzaSyBknuwqumRP-dWqTwrrGFoantCJKkFAM5s&markers=color:red%7Clabel:H%7C";
+
+        url = url + this.latitude +","+this.longitude;
+        int i = 1;
+        while (st.hasMoreTokens()) {
+            String str2 = "&markers=color:blue%7Clabel:A"+i+"%7C"+st.nextToken();
+
+            url = url + str2;
+        }
+        this.mapUrl = url;
+    }
 
 }

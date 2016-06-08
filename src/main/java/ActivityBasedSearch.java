@@ -78,6 +78,7 @@ public class ActivityBasedSearch {
 
             hotelLatLongList = hotelLatLongList+hotel.getLatitude()+","+hotel.getLongitude()+"|";
             hotel.addShopUrl();
+            hotel.addMapUrl(activitieslatlongList);
         }
 
 
